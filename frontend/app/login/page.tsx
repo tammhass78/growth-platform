@@ -1,4 +1,37 @@
+"use client";
+
+import axios from "axios";
+import { useState } from "react";
+
 export default function LoginPage() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] =
+    useState("");
+
+  const handleLogin = async (
+    e: React.FormEvent,
+  ) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/auth/login",
+        {
+          email,
+          password,
+        },
+      );
+
+      console.log(response.data);
+
+      alert("Login successful 🚀");
+    } catch (error) {
+      console.error(error);
+
+      alert("Login failed");
+    }
+  };
+
   return (
     <main className="min-h-screen bg-gray-100 flex items-center justify-center px-6">
       <div className="bg-white p-10 rounded-2xl shadow-xl w-full max-w-md">
@@ -6,7 +39,10 @@ export default function LoginPage() {
           Login
         </h1>
 
-        <form className="space-y-5">
+        <form
+          onSubmit={handleLogin}
+          className="space-y-5"
+        >
           <div>
             <label className="block mb-2 font-medium">
               Email
@@ -15,6 +51,10 @@ export default function LoginPage() {
             <input
               type="email"
               placeholder="Enter your email"
+              value={email}
+              onChange={(e) =>
+                setEmail(e.target.value)
+              }
               className="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-black"
             />
           </div>
@@ -27,6 +67,10 @@ export default function LoginPage() {
             <input
               type="password"
               placeholder="Enter your password"
+              value={password}
+              onChange={(e) =>
+                setPassword(e.target.value)
+              }
               className="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-black"
             />
           </div>
