@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Skill(speckit-git-feature)",
+      "Bash(.specify/extensions/git/scripts/bash/create-new-feature.sh *)",
+      "Skill(speckit-specify)",
+      "Bash(pwsh *)",
+      "Skill(speckit-plan)",
+      "Bash(powershell *)"
+    ]
+  }
+}
